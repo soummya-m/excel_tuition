@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <%- include('partials/header1') %>
+ </head>
+ <%- include('partials/navbar1') %>
+<head>
+  <meta charset="UTF-8">
+  <title>Our Tutors</title>
+  <style>
+    table {
+      width: 80%;
+      margin: 30px auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #03074e;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #81cdee ;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Tutors</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (our_tutors && our_tutors.length > 0) { %>
+        <% our_tutors.forEach(tutor => { %>
+          <tr>
+            <td><%= tutor.tutor_name %></td>
+            <td><%= tutor.subject %></td>
+            <td><%= tutor.email %></td>
+            <td><%= tutor.phone %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="4">No tutors available</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>

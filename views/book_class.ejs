@@ -1,0 +1,84 @@
+<%- include('partials/header1') %>
+<%- include('partials/navbar_student') %>
+
+<h2>📚 Available Courses for Booking</h2>
+
+<% if (booked) { %>
+  <p style="color: green; font-weight: bold; text-align: center;">✅ Course booked successfully!</p>
+<% } %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course ID</th>
+      <th>Course Name</th>
+      <th>Tutor Name</th>
+      <th>Price</th>
+      <th>Days</th>
+      <th>Time</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% courses.forEach(course => { %>
+      <tr>
+        <td><%= course.course_id %></td>
+        <td><%= course.course_name %></td>
+        <td><%= course.tutor_name %></td>
+        <td><%= course.course_price %></td>
+        <td><%= course.days %></td>
+        <td><%= course.time %></td>
+        <td>
+          <form method="POST" action="/book_class">
+             <input type="hidden" name="course_id" value="<%= course.course_id %>">
+             <button type="submit">Book</button>
+          </form>
+
+         
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<style>
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #3e6677;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  th {
+    background-color: #3e6677;
+    color: white;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  button {
+    background-color: #3e6677;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #2c4e5a;
+  }
+</style>

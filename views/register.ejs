@@ -1,0 +1,36 @@
+<%- include('partials/header1.ejs') %>
+
+<!DOCTYPE html>
+<html>
+	<body>
+		<%- include('partials/navbar1') %>
+		<div class="register">
+			<h1>Register</h1>
+			<br>
+			<form action="/register" method="post">
+				<label for="username">Username:</label>
+				<input type="text" name="username" placeholder="Username" id="username" required>
+				<br><br>
+				<label for="email">Email:</label>
+				<input type="text" name="email" placeholder="Email"
+				id="email" required>
+				<br><br>
+				<label for="phonenumber">Phone:</label>
+				<input type="text" name="phonenumber" placeholder="Phonenumber"
+				id="phonenumber" required>
+				<br><br>
+				<label for="password">Password:</label>
+				<input type="password" name="password" placeholder="Password" id="password" required>
+				<br><br>
+                <label for="role">Register as:</label><br>
+                <select name="role" id="role" required>
+                <option value="">-- Select Role --</option>
+                <option value="student">Student</option>
+                <option value="parent">Parent</option>
+                <option value="tutor">Tutor</option>
+                </select><br><br>
+				<input type="submit" value="Register">
+			</form>
+		</div>
+	</body>
+</html>

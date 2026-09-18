@@ -1,0 +1,100 @@
+<%- include('partials/header1') %>
+<%- include('partials/navbar_tutor') %>
+
+<h2>Approve Leave Requests</h2>
+<% if (updatedId) { %>
+ <p style="color: green; font-weight: bold; text-align: center;">
+    ✅ Leave request updated successfully.
+   </p>
+   <% } %>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  th, td {
+    border: 1px solid #999;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #3e6677;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  button {
+    padding: 6px 12px;
+    background-color: #3e6677;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+
+  button:hover {
+    background-color: #2c4e5a;
+  }
+
+  textarea {
+    width: 100%;
+  }
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th>Comment</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (leaveRequests && leaveRequests.length > 0) { %>
+      <% leaveRequests.forEach(function(request) { %>
+        <form action="/approve_leave/<%= request.id %>" method="POST">
+          <tr>
+            <td><%= request.student_name %></td>
+            <td><%= request.start_date.toLocaleDateString('en-CA') %></td>
+            <td><%= request.end_date.toLocaleDateString('en-CA') %>
+</td>
+            <td><%= request.reason %></td>
+            <td>
+              <select name="status">
+                <option value="pending" <%= request.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                <option value="approved" <%= request.status === 'approved' ? 'selected' : '' %>>Approved</option>
+                <option value="rejected" <%= request.status === 'rejected' ? 'selected' : '' %>>Rejected</option>
+              </select>
+            </td>
+            <td>
+              <textarea name="comment"><%= request.comment || '' %></textarea>
+            </td>
+           
+           <td>
+             <% if (request.status === 'approved' || request.status === 'rejected') { %>
+              <button type="submit" disabled style="background-color: gray;">Updated</button>
+              <% } else { %>
+             <button type="submit">Update</button>
+              <% } %>
+           </td>
+
+          </tr>
+        </form>
+      <% }) %>
+    <% } else { %>
+      <tr>
+        <td colspan="7">No leave requests from your students.</td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>

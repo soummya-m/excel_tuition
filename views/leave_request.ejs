@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <%- include('partials/header1.ejs') %>
+    </head>
+   <%- include('partials/navbar_student.ejs') %>
+<body>
+    <h2>Submit Leave Request</h2>
+
+    <form action="/leave_request" method="POST">
+       
+       
+        <label>Start Date:</label>
+        <input type="date" name="start_date" required><br><br>
+
+        <label>End Date:</label>
+        <input type="date" name="end_date" required><br><br>
+
+        <label>Reason:</label>
+        <textarea name="reason" required></textarea><br><br>
+
+    
+
+        <button type="submit">Submit</button>
+    </form>
+   
+</body>
+
+   
+</html>

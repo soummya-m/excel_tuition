@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <%- include('partials/header1.ejs') %> 
+ </head>
+ 
+  <%- include('partials/navbar1.ejs') %>
+  <!DOCTYPE html>
+<html>
+<head>
+    <title>Course Details</title>
+</head>
+<body>
+ <h1>Course Details</h1>
+  <style>
+    table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 30px;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #97d6f1;
+            color: rgb(9, 0, 0);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+
+  <table border="1">
+    <thead>
+      <tr>
+       <th>Course ID</th>
+       <th>Course Name</th>
+        <th>Tutor Name</th>
+        <th>Course Price</th>
+        <th>Days</th>
+        <th>Time</th>
+     </tr>
+    </thead>
+    <tbody>
+      <% if (course_details && course_details.length > 0) { %>
+     <% course_details.forEach(item => { %>
+
+     <tr>
+       <td><%= item.course_id %></td>
+       <td><%= item.course_name %></td>
+       <td><%= item.tutor_name %></td>
+       <td><%= item.course_price %></td>
+       <td><%= item.days %></td>
+       <td><%= item.time %></td>
+     </tr>
+      <% }) %>
+      <% } else { %>
+     <tr>
+       <td colspan="5">No courses available.</td>
+     </tr>
+      <% } %>
+   </tbody>
+  </table>
+</body>
+</html>
+

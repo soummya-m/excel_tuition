@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <%- include('partials/header1') %>
+  <title>Update Tutor</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #3e6677;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
+<head>
+  <title>User Approvals</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #3e6677;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    form {
+      display: inline;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/navbar_admin') %>
+  <h1>User Management</h1>
+
+  <h2>Pending Users</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% let pendingUsers = users.filter(u => u.status === 'pending'); %>
+      <% if (pendingUsers.length === 0) { %>
+        <tr><td colspan="6">No pending users found.</td></tr>
+      <% } else { %>
+        <% pendingUsers.forEach(user => { %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phonenumber %></td>
+            <td><%= user.role %></td>
+            <td><%= user.status %></td>
+            <td>
+              <form action="/admin/approve-user/<%= user.user_id %>" method="POST" onsubmit="return confirm('Approve this user?');">
+                <button type="submit">Approve</button>
+              </form>
+              <form action="/admin/reject-user/<%= user.user_id %>" method="POST" onsubmit="return confirm('Reject this user?');">
+                <button type="submit">Reject</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <h2>Approved Users</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% let approvedUsers = users.filter(u => u.status === 'approved'); %>
+      <% if (approvedUsers.length === 0) { %>
+        <tr><td colspan="5">No approved users found.</td></tr>
+      <% } else { %>
+        <% approvedUsers.forEach(user => { %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phonenumber %></td>
+            <td><%= user.role %></td>
+            <td><%= user.status %></td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<%- include('partials/header1') %>
+
+
+<h2>Progress Report</h2>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Student Name</th>
+      <th>Subject</th>
+      <th>Score</th>
+      <th>Attendance</th>
+      <th>Feedback</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% reports.forEach(report => { %>
+      <tr>
+        <td><%= new Date(report.date).toLocaleDateString('en-GB') %></td>
+        <td><%= report.student_username %></td>
+        <td><%= report.subject %></td>
+        <td><%= report.score %></td>
+        <td><%= report.attendance %></td>
+        <td><%= report.feedback %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<style>
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #3e6677;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  th {
+    background-color: #3e6677;
+    color: white;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  button {
+    background-color: #3e6677;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #2c4e5a;
+  }
+</style>

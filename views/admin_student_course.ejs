@@ -1,0 +1,57 @@
+<head>
+  <%- include('partials/header1') %>
+</head>
+<%- include('partials/navbar_admin.ejs') %>
+<h2>Student Course Enrollments</h2>
+ 
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Course ID</th>
+      <th>Student Name</th>
+      <th>Course Name</th>
+      <th>Tutor Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (records.length === 0) { %>
+      <tr><td colspan="4">No enrollments found.</td></tr>
+    <% } else { %>
+      <% records.forEach(record => { %>
+        <tr>
+          <td><%= record.course_id %></td>
+          <td><%= record.student_name %></td>
+          <td><%= record.course_name %></td>
+          <td><%= record.tutor_name %></td>
+        </tr>
+      <% }) %>
+    <% } %>
+  </tbody>
+</table>
+<style>
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #3e6677;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  h2 {
+    margin-top: 30px;
+  }
+</style>

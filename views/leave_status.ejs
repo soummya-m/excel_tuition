@@ -1,0 +1,67 @@
+<%- include('partials/header1') %>
+<%- include('partials/navbar_student') %>
+
+<h2 style="text-align:center; color:#3e6677;">📄 Your Leave Requests</h2>
+
+<% if (leaveRequests.length === 0) { %>
+  <p style="text-align: center; color: grey;">You have not submitted any leave requests yet.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% leaveRequests.forEach(leave => { %>
+        <tr>
+          
+         <td><%= leave.start_date.toLocaleDateString('en-CA') %></td>
+         <td><%= leave.end_date.toLocaleDateString('en-CA') %></td>
+
+
+          <td><%= leave.reason %></td>
+          <td>
+            <% if (leave.status === 'approved') { %>
+              ✅ Approved
+            <% } else if (leave.status === 'rejected') { %>
+              ❌ Rejected
+            <% } else { %>
+               Pending
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<style>
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #3e6677;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  h2 {
+    margin-top: 30px;
+  }
+</style>

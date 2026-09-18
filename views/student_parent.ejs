@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <%- include('partials/header1') %>
+  
+</head>
+<head>
+  <title>Link Student</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    form { max-width: 400px; margin: auto; }
+    label, select, input { display: block; margin: 10px 0; width: 100%; }
+    button { padding: 10px; }
+  </style>
+</head>
+<body>
+  
+    
+  <h2>Link a Student to Your Account</h2>
+
+  <form action="/student_parent" method="POST">
+    <label for="student_email">Enter Student Email:</label>
+    <input type="email" name="student_email" placeholder="student@example.com" required>
+
+
+    <label for="relation">Relation:</label>
+    <input type="text" name="relation" placeholder="e.g. Father, Mother" required>
+
+    <button type="submit">Link Student</button>
+  </form>
+</body>
+</html>
+
+
+

@@ -1,0 +1,139 @@
+<%- include('partials/header1') %>
+<%- include('partials/navbar_tutor.ejs') %>
+
+<% if (typeof message !== 'undefined' && message) { %>
+  <div style="color: green; text-align: center; font-weight: bold; margin-bottom: 20px;">
+    <%= message %>
+  </div>
+<% } %>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 40px;
+        color: #2b4f60;
+    }
+
+    form {
+        background: #ffffff;
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex: 1 1 45%;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+    }
+
+    textarea {
+        height: 80px;
+    }
+
+    button[type="submit"] {
+        display: block;
+        width: 200px;
+        margin: 20px auto 0;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #3e6677;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #2b4f60;
+    }
+</style>
+
+<h2>Upload Student Progress Report</h2>
+
+<form action="/progress_reportform" method="POST">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" name="date" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="user_id">Select Student:</label>
+            <select name="user_id" required>
+                <option value="">-- Select a student --</option>
+                <% students.forEach(student => { %>
+                    <option value="<%= student.user_id %>">
+
+                    
+                        <%= student.username %> (ID: <%= student.user_id %>) / <%= student.course_name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <select name="subject" required>
+                <option value="">-- Select a subject --</option>
+                <% subjects.forEach(subject => { %>
+                    <option value="<%= subject.course_name %>"><%= subject.course_name %></option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="score">Score:</label>
+            <input type="number" name="score" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="attendance">Attendance (%):</label>
+            <input type="text" name="attendance" required>
+        </div>
+        <div class="form-group">
+            <label for="feedback">Feedback:</label>
+            <textarea name="feedback" required></textarea>
+        </div>
+    </div>
+
+    <button type="submit">Submit Report</button>
+</form>
